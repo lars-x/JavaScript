@@ -125,7 +125,29 @@ function pi_dart(no_of_darts) {
     return res;
 }
 
-$(document).on('click', '#btn_task_4', function () {
+$('#btn_task_4_simple').click(function () {
+    const ms = 2000;
+    $('#fader').fadeOut(ms).fadeIn(ms).fadeOut(ms).fadeIn(ms);
+    $('#hider').hide(ms).show(ms).hide(ms).show(ms);
+    $('#slider').slideUp(ms).slideDown(ms).slideUp(ms).slideDown(ms);
+});
+
+$('#btn_task_4_custom').click(function () {
+    const ms = 2000;
+
+    $("#custom").animate({
+        "font-size": "200px"
+    }, {
+        duration: ms,
+        complete: function () {
+            $("#custom").text("Heja Gais!");
+            $("#custom").css("font-size", "20px");
+        }
+    });
+});
+
+
+$('#btn_task_4_svg').click(function () {
     $('#svg_darts').children('circle').remove();
 
     const no_of_darts = parseFloat($("#txt_no_of_darts").val());
@@ -133,5 +155,40 @@ $(document).on('click', '#btn_task_4', function () {
 
     const txt_pi = pi.toString();
     $("#txt_pi").val(txt_pi);
+});
 
+let timerFunction = null;
+function startAnimation() {
+    const circles = $("#svg_darts > circle")
+
+    clearInterval(timerFunction);
+    timerFunction = setInterval(frame, 2);
+
+    let k = 0;
+    let circle = $(circles[k]);
+    function frame() {
+        const x = circle.attr("cx");
+        const y = circle.attr("cy");
+        const newX = parseInt(x) - 2;
+        const newY = parseInt(y) + 2;
+        circle.attr("cx", newX);
+        circle.attr("cy", newY);
+
+        if (newX < -10 || newY < -110) {
+            k = k + 1;
+            if (k >= circles.length) {
+                clearInterval(timerFunction);
+                return;
+            }
+            circle = $(circles[k]);            
+        }
+    }
+}
+
+$('#btn_task_4_svg_anim_start').click(function () {
+    startAnimation();
+});
+
+$('#btn_task_4_svg_anim_stop').click(function () {
+    clearInterval(timerFunction);
 });

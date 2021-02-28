@@ -40,7 +40,7 @@
 
             <hr>
             <h2>Task 3 - DOM</h2>
-            <p>Show a pie chart</p>
+            <p>Show a pie chart with the help of Svg.</p>
             <label for="txt_angle_pie">Angle [deg]:</label>
             <input name="txt_angle_pie" type="text" maxlength="512" id="txt_angle_pie" />
             <button id="btn_task_3">Update Pie chart</button>
@@ -49,10 +49,26 @@
 
             <hr>
             <h2>Task 4 - jQuery</h2>
+            <button id="btn_task_4_simple">Start Simple Animation</button>
+            <div id="task_4_anim">
+                <span id="fader">Fade Out and In</span> &middot;
+                <span id="hider">Hide and Show</span>  &middot;
+                <span id="slider">Slide Up and Down</span>
+            </div>
+
+            <hr>
+            <button id="btn_task_4_custom">Start Custom Animation</button>
+            <div id="task_4_anim">
+                <span id="custom">Custom</span>
+            </div>
+
+            <hr>
+            <h3>Svg animation</h3>
             <p>Calculate Pi with the help of a Pie chart</p>
+            <p>See <a href="http://www.eveandersson.com/pi/monte-carlo-circle">Calculation of Pi Using the Monte Carlo Method</a> for more info.</p>
             <label for="txt_no_of_darts">Number of Darts:</label>
             <input name="txt_no_of_darts" type="text" maxlength="512" id="txt_no_of_darts" />
-            <button id="btn_task_4">Calculate Pi</button>
+            <button id="btn_task_4_svg">Calculate Pi</button>
             <label for="txt_pi"> Pi:</label>
             <input name="txt_pi" type="text" maxlength="512" id="txt_pi" />
 
@@ -67,13 +83,19 @@
                 </svg>
             </div>
 
+            <h3>Move the darts to the garage</h3>
+            <button id="btn_task_4_svg_anim_start">Start animation</button>
+            <button id="btn_task_4_svg_anim_stop">Stop animation</button>
+
             <hr>
             <h2>Task 5 - Additional Task</h2>
-            <p>TODO</p>
+            <p>Show a pie chart with the help of HTML Canvas.</p>
+
+            <hr>
+            <h2>The End</h2>
 
             <script src="app.js" type="module"></script>
             <noscript>You need to enable JavaScript to view the full site.</noscript>
-
             <hr>
         </section>
 
