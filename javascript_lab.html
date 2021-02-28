@@ -41,10 +41,10 @@
             <hr>
             <h2>Task 3 - DOM</h2>
             <p>Show a pie chart with the help of Svg.</p>
-            <label for="txt_angle_pie">Angle [deg]:</label>
-            <input name="txt_angle_pie" type="text" maxlength="512" id="txt_angle_pie" />
+            <label for="txt_angle_pie_svg">Angle [deg]:</label>
+            <input name="txt_angle_pie_svg" type="text" maxlength="512" id="txt_angle_pie_svg" />
             <button id="btn_task_3">Update Pie chart</button>
-            <div id="pie_chart" class="chart">
+            <div id="pie_chart_svg" class="chart">
             </div>
 
             <hr>
@@ -52,7 +52,7 @@
             <button id="btn_task_4_simple">Start Simple Animation</button>
             <div id="task_4_anim">
                 <span id="fader">Fade Out and In</span> &middot;
-                <span id="hider">Hide and Show</span>  &middot;
+                <span id="hider">Hide and Show</span> &middot;
                 <span id="slider">Slide Up and Down</span>
             </div>
 
@@ -90,8 +90,21 @@
             <hr>
             <h2>Task 5 - Additional Task</h2>
             <p>Show a pie chart with the help of HTML Canvas.</p>
+            <label for="txt_angle_pie_canvas">Angle [deg]:</label>
+            <input name="txt_angle_pie_canvas" type="number" id="txt_angle_pie_canvas" min="0" max="360" />
+            <button id="btn_task_5">Update Pie chart</button>
+            <div class="chart">
+                <canvas id="canvas_pie" width="200" height="200">
+                    Your browser does not support the HTML canvas tag.</canvas>
+            </div>
 
             <hr>
+            <h3>Let us end with the famous Canvas Clock</h3>
+            <div class="chart">
+                <canvas id="canvas_clock" width="200" height="200" style="background-color:#333"></canvas>
+            </div>
+            <hr>
+
             <h2>The End</h2>
 
             <script src="app.js" type="module"></script>

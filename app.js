@@ -8,10 +8,14 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById("txt_angle").value = "360";
     document.getElementById("txt_area").value = "";
 
-    document.getElementById("txt_angle_pie").value = "60";
-    draw_pie_chart(60);
+    document.getElementById("txt_angle_pie_svg").value = "60";
+    document.getElementById("txt_angle_pie_canvas").value = "60";
+    draw_pie_chart_svg(60);
+    draw_pie_chart_canvas(60);
 
     $("#txt_no_of_darts").val(42);
+
+    startClock();
 });
 
 document.querySelector('#btn_task_1').addEventListener('click', function () {
@@ -54,12 +58,12 @@ document.querySelector('#btn_task_2').addEventListener('click', function () {
 });
 
 document.querySelector('#btn_task_3').addEventListener('click', function () {
-    const angle_deg = parseFloat(document.getElementById("txt_angle_pie").value);
-    draw_pie_chart(angle_deg);
+    const angle_deg = parseFloat(document.getElementById("txt_angle_pie_svg").value);
+    draw_pie_chart_svg(angle_deg);
 });
 
 
-document.querySelector("#txt_angle_pie").addEventListener("keyup", function (event) {
+document.querySelector("#txt_angle_pie_svg").addEventListener("keyup", function (event) {
     event.preventDefault();
     if (event.keyCode === 13) {
         document.querySelector('#btn_task_3').click();
@@ -74,7 +78,7 @@ document.querySelector("#txt_angle_pie").addEventListener("keyup", function (eve
 //   <path d="M 0 0 L 0 -100 A 100 100 0 0 1 100 0 z" stroke="black" fill="blue" stroke-width="2" fill-opacity="1.0" />
 // </svg>
 // Does not work well for angle > 180.
-function draw_pie_chart(angle_deg) {
+function draw_pie_chart_svg(angle_deg) {
     const diameter = 200; // Diameter of the pie chart in pixels
     const radius = diameter / 2; // Diameter of the pie chart in pixels
     const d = diameter.toFixed(0);
@@ -99,7 +103,7 @@ function draw_pie_chart(angle_deg) {
         ' " stroke="black" fill="blue" stroke-width="2" fill-opacity="1.0" />';
     const svg_end = '</svg>';
     const html = svg + half_circle_left_ + half_circle_right + pie + svg_end;
-    document.querySelector('#pie_chart').innerHTML = html;
+    document.querySelector('#pie_chart_svg').innerHTML = html;
 }
 
 function pi_dart(no_of_darts) {
@@ -180,7 +184,7 @@ function startAnimation() {
                 clearInterval(timerFunction);
                 return;
             }
-            circle = $(circles[k]);            
+            circle = $(circles[k]);
         }
     }
 }
@@ -192,3 +196,125 @@ $('#btn_task_4_svg_anim_start').click(function () {
 $('#btn_task_4_svg_anim_stop').click(function () {
     clearInterval(timerFunction);
 });
+
+function draw_pie_chart_canvas(angle_deg) {
+    const canvas = document.getElementById("canvas_pie");
+    const ctx = canvas.getContext("2d");
+    const r = canvas.height / 2; // radius
+    const startangle_deg = 0;
+    const endangle_deg = angle_deg;
+    const startangle = (startangle_deg - 90) * deg2rad;
+    const endangle = (endangle_deg - 90) * deg2rad;
+
+    // Not used right now
+    // Remap the (0,0) position (of the drawing object) to the center of the canva
+    // ctx.translate(r, r);
+
+    ctx.arc(r, r, r, 0, 360 * deg2rad);
+    ctx.fillStyle = "white";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.lineTo(r, r);
+    ctx.lineTo(r, 0);
+    ctx.arc(r, r, r, startangle, endangle);
+    ctx.fillStyle = "blue";
+    ctx.fill();
+    ctx.stroke();
+}
+
+document.querySelector("#txt_angle_pie_canvas").addEventListener("keyup", function (event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.querySelector('#btn_task_5').click();
+    }
+});
+
+document.querySelector("#txt_angle_pie_canvas").addEventListener("change", function () {
+    document.querySelector('#btn_task_5').click();
+});
+
+$('#btn_task_5').click(function () {
+    const angle_deg = parseFloat(document.getElementById("txt_angle_pie_canvas").value);
+    draw_pie_chart_canvas(angle_deg);
+});
+
+// Code from: https://www.w3schools.com/graphics/canvas_clock_start.asp
+function startClock() {
+    const canvas = document.getElementById("canvas_clock");
+    const ctx = canvas.getContext("2d");
+    let radius = canvas.height / 2;
+    ctx.translate(radius, radius);
+    radius = radius * 0.90;
+    setInterval(drawClock, 1000);
+
+    function drawClock() {
+        drawFace(ctx, radius);
+        drawNumbers(ctx, radius);
+        drawTime(ctx, radius);
+    }
+
+    function drawFace(ctx, radius) {
+        ctx.beginPath();
+        ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+        ctx.fillStyle = 'white';
+        ctx.fill();
+        const grad = ctx.createRadialGradient(0, 0, radius * 0.95, 0, 0, radius * 1.05);
+        grad.addColorStop(0, '#333');
+        grad.addColorStop(0.5, 'white');
+        grad.addColorStop(1, '#333');
+        ctx.strokeStyle = grad;
+        ctx.lineWidth = radius * 0.1;
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+        ctx.fillStyle = '#333';
+        ctx.fill();
+    }
+
+    function drawNumbers(ctx, radius) {
+        ctx.font = radius * 0.15 + "px arial";
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        for (let num = 1; num < 13; num++) {
+            let ang = num * Math.PI / 6;
+            ctx.rotate(ang);
+            ctx.translate(0, -radius * 0.85);
+            ctx.rotate(-ang);
+            ctx.fillText(num.toString(), 0, 0);
+            ctx.rotate(ang);
+            ctx.translate(0, radius * 0.85);
+            ctx.rotate(-ang);
+        }
+    }
+
+    function drawTime(ctx, radius) {
+        const now = new Date();
+        let hour = now.getHours();
+        let minute = now.getMinutes();
+        let second = now.getSeconds();
+        //hour
+        hour = hour % 12;
+        hour = (hour * Math.PI / 6) +
+            (minute * Math.PI / (6 * 60)) +
+            (second * Math.PI / (360 * 60));
+        drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+        //minute
+        minute = (minute * Math.PI / 30) + (second * Math.PI / (30 * 60));
+        drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+        // second
+        second = (second * Math.PI / 30);
+        drawHand(ctx, second, radius * 0.9, radius * 0.02);
+    }
+
+    function drawHand(ctx, pos, length, width) {
+        ctx.beginPath();
+        ctx.lineWidth = width;
+        ctx.lineCap = "round";
+        ctx.moveTo(0, 0);
+        ctx.rotate(pos);
+        ctx.lineTo(0, -length);
+        ctx.stroke();
+        ctx.rotate(-pos);
+    }
+}
