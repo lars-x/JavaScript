@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
     draw_pie_chart_svg(60);
     draw_pie_chart_canvas(60);
 
-    $("#txt_no_of_darts").val(42);
+    $("#txt_no_of_darts").val(4);
 
     startClock();
 });
