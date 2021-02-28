@@ -42,7 +42,7 @@ function validate_task_2(radius, angle_deg) {
     }
 
     if ((angle_deg < 0) || (angle_deg > 360)) {
-        show_error("Radius must be in [0..360] degress");
+        show_error("Angle must be in [0..360] degress");
     }
 }
 
