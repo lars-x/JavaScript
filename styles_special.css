@@ -1,0 +1,62 @@
+:root {
+	/* Global CSS variables */
+	--blue: #bbecff;
+	--white: #ffffff;
+	--black: #000000;
+}
+
+/* Because this breaks the inheritance chain completely for any property that is 
+normally inherited such as color, setting those properties in a * rule is 
+considered bad practice unless you have a very good reason to break inheritance 
+this way (most use cases that involve breaking inheritance require you to do it 
+for just one element, not all of them).
+ */
+* {
+	color: var(--fontColor);
+}
+
+body {
+	box-sizing: border-box;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	background: var(--bg);
+}
+
+.light-theme {
+	--bg: var(--blue);
+	--fontColor: var(--black);
+	--btnBg: var(--black);
+	--btnFontColor: var(--white);
+}
+
+.dark-theme {
+	--bg: var(--black);
+	--fontColor: var(--blue);
+	--btnBg: var(--white);
+	--btnFontColor: var(--black);
+}
+
+button {
+	color: var(--btnFontColor);
+	background-color: var(--btnBg);
+}
+
+#btn_task_1 {
+	height: 50px;
+	width: 50px;
+	border-radius: 50%;
+	border: none;
+}
+
+#btn_task_1:focus {
+	outline-style: none;
+}
+
+input {
+	color: var(--btnFontColor);
+	background-color: var(--btnBg);
+}
+
+.chart {
+	margin: 20px;
+}

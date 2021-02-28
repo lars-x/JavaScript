@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="Lars Johansson" name="author">
+    <link href="styles_special.css" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>JavaScript -- Lab</title>
+</head>
+
+<body class="light-theme">
+    <nav>
+        <ul class="sidenav">
+            <li><a href="index.html">Jump back to the book page</a></li>
+        </ul>
+    </nav>
+
+    <div class="content">
+        <section>
+            <h1>Lab 3: JavaScript</h1>
+            <hr>
+            <h2>Task 1 - JavaScript in HTML Code</h2>
+            <p>Enable switching between a light and a dark theme.</p>
+            <button id="btn_task_1">Dark</button>
+
+            <hr>
+            <h2>Task 2 - Custom Function</h2>
+            <h3>Vanilla Javascript</h3>
+            <p>Calculate the area for a pie.</p>
+            <label for="txt_radius">Radius:</label>
+            <input name="txt_radius" type="text" maxlength="512" id="txt_radius" />
+            <label for="txt_angle">Angle [deg]:</label>
+            <input name="txt_angle" type="text" maxlength="512" id="txt_angle" />
+            <button id="btn_task_2">Calculate Area</button>
+            <label for="txt_area"> Area:</label>
+            <input name="txt_area" type="text" maxlength="512" id="txt_area" />
+            <div id=error_task_2></div>
+
+            <hr>
+            <h2>Task 3 - DOM</h2>
+            <p>Show a pie chart</p>
+            <label for="txt_angle_pie">Angle [deg]:</label>
+            <input name="txt_angle_pie" type="text" maxlength="512" id="txt_angle_pie" />
+            <button id="btn_task_3">Update Pie chart</button>
+            <div id="pie_chart" class="chart">
+            </div>
+
+            <hr>
+            <h2>Task 4 - jQuery</h2>
+            <p>Calculate Pi with the help of a Pie chart</p>
+            <label for="txt_no_of_darts">Number of Darts:</label>
+            <input name="txt_no_of_darts" type="text" maxlength="512" id="txt_no_of_darts" />
+            <button id="btn_task_4">Calculate Pi</button>
+            <label for="txt_pi"> Pi:</label>
+            <input name="txt_pi" type="text" maxlength="512" id="txt_pi" />
+
+            <div class="chart" id="div_svg_darts">
+                <svg width="200" height="200" viewBox="0 -100 100 100" id="svg_darts">
+                    <rect x="0" y="-100" width="100%" height="100%" stroke="black" fill="white" stroke-width="1" />
+                    <path d="M 0 0 L 0 -100 A 100 100 0 0 1 100 0 z" stroke="black" fill="blue" stroke-width="1" fill-opacity="1.0" />
+                    <circle cx="50" cy="-90" r="2" fill="red" />
+                    <circle cx="80" cy="-70" r="2" fill="red" />
+                    <circle cx="60" cy="-55" r="2" fill="yellow"></circle>
+                    <circle cx="36" cy="-41" r="2" fill="yellow"></circle>
+                </svg>
+            </div>
+
+            <hr>
+            <h2>Task 5 - Additional Task</h2>
+            <p>TODO</p>
+
+            <script src="app.js" type="module"></script>
+            <noscript>You need to enable JavaScript to view the full site.</noscript>
+
+            <hr>
+        </section>
+
+        <footer class="footer">
+            <p>Den här sidan sköts av Lars Johansson &middot; <a href="kontakt.html">Kontaktsida</a></p>
+            <p>Sidan uppdaterades senast 2020-02-29, 20:20.</p>
+            <p>
+                <a href="https://jigsaw.w3.org/css-validator/check/referer">
+                    <img style="border:0;width:88px;height:31px" src="//jigsaw.w3.org/css-validator/images/vcss-blue" alt="Valid CSS!" />
+                </a>
+                <br class="mobile-break">
+                <a href="https://validator.w3.org/unicorn/check?ucn_uri=referer&amp;ucn_task=conformance">Unicorn - W3C's Unified Validator</a>
+            </p>
+        </footer>
+    </div> <!-- class="content" -->
+</body>
+
+</html>
+
+</html>
